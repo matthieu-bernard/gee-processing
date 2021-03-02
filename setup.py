@@ -3,11 +3,9 @@ from setuptools import setup, find_packages
 requirements = [
     'earthengine-api',
     'intake-stac',
-    'jupyter',
     'folium',
     'geopandas',
     'rasterio',
-    'geoviews',
     'scipy',
     'msgpack',
     'toolz',
