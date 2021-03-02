@@ -1,0 +1,13 @@
+sources:
+  aoi:
+    args:
+      path: '{{ CATALOG_DIR }}/aoi_catalog.yaml'
+    description: ''
+    driver: intake.catalog.local.YAMLFileCatalog
+    metadata: {}
+  datasets:
+    args:
+      path: '{{ CATALOG_DIR }}/datasets_catalog.yaml'
+    description: 'Post-Processsed datasets from GEE platform'
+    driver: intake.catalog.local.YAMLFileCatalog
+    metadata: {}

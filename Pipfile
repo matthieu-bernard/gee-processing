@@ -15,6 +15,10 @@ geopandas = "*"
 rasterio = "*"
 geoviews = "*"
 scipy = "*"
+gee-processing = {editable = true, path = "."}
+msgpack = "*"
+toolz = "*"
+intake-geopandas = "*"
 
 [requires]
 python_version = "3.8"

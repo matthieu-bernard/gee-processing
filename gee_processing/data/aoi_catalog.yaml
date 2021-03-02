@@ -1,0 +1,18 @@
+plugins:
+  source:
+    - module: intake_geopandas
+sources:
+  polygon_chirp_mongolia:
+    description: Polygon defining area of interest for chirps processing
+    metadata:
+      tags:
+        - polygon
+        - area-of-interest
+        - mongolia
+      plot:
+        tiles: 'StamenToner'
+        width: 800
+        height: 450
+    driver: geojson
+    args:
+      urlpath: '{{ CATALOG_DIR }}/aoi.geojson'

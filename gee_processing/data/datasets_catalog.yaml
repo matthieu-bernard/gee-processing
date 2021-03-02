@@ -1,0 +1,16 @@
+plugins:
+  source:
+    - module: intake_xarray
+sources:
+  rainy_days_chirps:
+    description: Number of rainy days per month post-processed from the CHIRPS dataset
+    driver: rasterio
+    args:
+      urlpath: '{{ CATALOG_DIR }}/monthly_average_rainy_days.tif'
+    metadata:
+      url: https://www.chc.ucsb.edu/data/chirps
+      tags:
+        - chirps
+        - post_processed
+        - rainfall
+
