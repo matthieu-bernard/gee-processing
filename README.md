@@ -1,4 +1,4 @@
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matthieu-bernard/gee-processing/blob/main/chirps_processing_colab.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matthieu-bernard/gee-processing/blob/main/notebooks/chirps_processing_colab.ipynb)
 
 # Google Earth Engine processing
 
@@ -17,7 +17,7 @@ More like a collection of scripts that might move to a proper package as it grow
 
 ### Google Colab
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matthieu-bernard/gee-processing/blob/main/chirps_processing_colab.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matthieu-bernard/gee-processing/blob/main/notebooks/chirps_processing_colab.ipynb)
 
 The colab link will launch a notebook in Google Colab.
 The notebook is self contained but will require you to have a Google Drive account as it save artifacts to your Drive.
