@@ -13,8 +13,6 @@ requirements = [
 ]
 
 setup_requirements = [
-    'setuptools_scm',
-    'pytest-runner',
 ]
 
 test_requirements = [
