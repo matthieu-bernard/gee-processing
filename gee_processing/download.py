@@ -41,7 +41,7 @@ def ee_export_image(ee_image: ee.Image,
     filename_zip = filename.replace('.tif', '.zip')
 
     if filetype != 'tif':
-        print('The filename must end with .tif')
+        LOG.error('The filename must end with .tif')
         return
 
     try:
@@ -54,12 +54,12 @@ def ee_export_image(ee_image: ee.Image,
             params['crs'] = crs
 
         url = ee_image.getDownloadURL(params)
-        print('Downloading data from {}\nPlease wait ...'.format(url))
+        LOG.info('Downloading data from {}\nPlease wait ...'.format(url))
         r = requests.get(url, stream=True)
 
         if r.status_code != 200:
-            print('An error occurred while downloading.')
-            print(r.text)
+            LOG.error('An error occurred while downloading.')
+            LOG.error(r.text)
             return
 
         with open(filename_zip, 'wb') as fd:
@@ -67,8 +67,8 @@ def ee_export_image(ee_image: ee.Image,
                 fd.write(chunk)
 
     except Exception as e:
-        print('An error occurred while downloading.')
-        print(e)
+        LOG.error('An error occurred while downloading.')
+        LOG.error(e)
         return
 
     try:
@@ -78,11 +78,11 @@ def ee_export_image(ee_image: ee.Image,
         os.remove(filename_zip)
 
         if file_per_band:
-            print('Data downloaded to %s' % os.path.dirname(filename))
+            LOG.info('Data downloaded to %s' % os.path.dirname(filename))
         else:
-            print('Data downloaded to %s' % filename)
+            LOG.info('Data downloaded to %s' % filename)
     except Exception as e:
-        print(e)
+        LOG.error(e)
 
 
 
@@ -111,16 +111,15 @@ def ee_export_image_collection(ee_image_collection: ee.ImageCollection,
         os.makedirs(out_dir)
 
     try:
-        print('here')
         count = int(ee_image_collection.size().getInfo())
-        print("Total number of images: {}\n".format(count))
+        LOG.info("Total number of images: {}\n".format(count))
 
         images = ee_image_collection.toList(count)
         for i in range(count):
             image = ee.Image(images.get(i))
             name = image.get('system:index').getInfo() + '.tif'
             filename = os.path.join(os.path.abspath(out_dir), name)
-            print('Exporting {}/{}: {}'.format(i + 1, count, name))
+            LOG.info('Exporting {}/{}: {}'.format(i + 1, count, name))
             ee_export_image(image,
                             filename=filename,
                             scale=scale,
@@ -129,4 +128,4 @@ def ee_export_image_collection(ee_image_collection: ee.ImageCollection,
                             file_per_band=file_per_band)
 
     except Exception as e:
-        print(e)
+        LOG.error(e)
