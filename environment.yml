@@ -1,0 +1,25 @@
+# binder development environment
+name: gee-preocessing-dev
+channels:
+  - conda-forge
+dependencies:
+  - bokeh=2.2
+  - geopandas
+  - geoviews
+  - hvplot
+  - intake
+  - intake-geopandas
+  - intake-xarray
+  - intake-stac
+  - numpy
+  - panel
+  - pip
+  - pyproj
+  - python=3.8
+  - rioxarray
+  - earthengine-api
+  - folium
+  - scipy
+  - toolz
+  - pip:
+      - -e .
