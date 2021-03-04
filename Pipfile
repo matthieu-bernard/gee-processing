@@ -5,17 +5,15 @@ verify_ssl = true
 
 [dev-packages]
 yapf = "*"
+jupyterlab = "*"
 
 [packages]
 earthengine-api = "*"
 intake-stac = "*"
-jupyter = "*"
 folium = "*"
 geopandas = "*"
 rasterio = "*"
-geoviews = "*"
 scipy = "*"
-gee-processing = {editable = true, path = "."}
 msgpack = "*"
 toolz = "*"
 intake-geopandas = "*"

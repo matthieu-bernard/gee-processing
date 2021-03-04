@@ -10,9 +10,6 @@ requirements = [
     'msgpack',
     'toolz',
     'intake-geopandas',
-    'hvplot',
-    'geoviews',
-    'matplotlib'
 ]
 
 setup_requirements = [
