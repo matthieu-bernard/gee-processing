@@ -53,17 +53,17 @@ You can copy paste and modify play with it to get a feel for the platform
 
 ```javascript
 var precip =ee.ImageCollection("UCSB-CHG/CHIRPS/DAILY").select('precipitation');
-var masked_precip = precip.map(function (img) {return img.gt(0)});
+var masked_precip = precip.map(function (img) {return img.gt(0).copyProperties(img, img.propertyNames())});
 
-var aoi = ee.FeatureCollection('users/matthieu_bernard/aoi').geometry();
+var aoi = ee.FeatureCollection('users/matthieu_bernard/aoi_chirps').geometry();
 
 var months = ee.List.sequence(1, 12)
-var years = ee.List.sequence(2013, 2017)
+var years = ee.List.sequence(1981, 2020)
 
 var byMonthYear = ee.ImageCollection.fromImages(
   years.map(function (y){
     return months.map(function (m) {
-        return precip
+        return masked_precip
         .filter(ee.Filter.calendarRange(y, y, 'year'))
         .filter(ee.Filter.calendarRange(m, m, 'month'))
         .sum()
@@ -78,9 +78,9 @@ var byMonth = ee.ImageCollection.fromImages(
         .filterMetadata('month', 'equals', m)
         .mean()
         .clip(aoi)
+        .toInt()
         .set('month', m)
-        .set('description', ('number of rainy days mean the number of days that have non null rainfall amount over'
-                             'the aggregation period'))
+        .set('description', 'number of rainy days mean the number of days that have non null rainfall amount over the aggregation period')
         .set('aggregation_period', 'calendar_month')
         .set('long_name', 'number_of_rainy_days')
         .set('original_dataset', {'title': 'CHIRPS Daily: Climate Hazards Group InfraRed Precipitation with Station Data (version 2.0 final',
@@ -90,9 +90,25 @@ var byMonth = ee.ImageCollection.fromImages(
         .set('provider', 'matth.bernard@gmail.com');
   }));
 
-print(byMonth);
 
-Map.addLayer(byMonth);
+var images = byMonth.toList(12);
+
+var i = 0
+for (i = 1; i<13; i++) {
+  var img = ee.Image(images.get(i-1));
+  Export.image.toDrive({
+      'image': img,
+      'fileNamePrefix': 'monthly_average_rainy_days_int_' + i,
+      'description':'monthly_average_rainy_days_'+i,
+      'scale': 5000,
+      'maxPixels': 1.0E13,
+      'region': aoi,
+      'fileFormat': 'GeoTIFF',
+      'formatOptions': {
+        'cloudOptimized': true
+      },
+      'folder': 'chirps',
+  });
 ```
 
 
