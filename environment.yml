@@ -21,5 +21,6 @@ dependencies:
   - folium
   - scipy
   - toolz
+  - jupyterlab
   - pip:
       - -e .
