@@ -17,6 +17,7 @@ scipy = "*"
 msgpack = "*"
 toolz = "*"
 intake-geopandas = "*"
+gee-processing = {editable = true, path = "."}
 
 [requires]
 python_version = "3.8"
