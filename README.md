@@ -78,7 +78,7 @@ var byMonth = ee.ImageCollection.fromImages(
         .filterMetadata('month', 'equals', m)
         .mean()
         .clip(aoi)
-        .toInt()
+        .round()
         .set('month', m)
         .set('description', 'number of rainy days mean the number of days that have non null rainfall amount over the aggregation period')
         .set('aggregation_period', 'calendar_month')
